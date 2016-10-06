@@ -18,9 +18,6 @@ public class TestControlsOne : MonoBehaviour {
         if ((inputDirection.x >= 0.1 || inputDirection.x <= -0.1) || (inputDirection.z >= 0.1 || inputDirection.z <= -0.1))
             transform.Translate(inputDirection.x / 2, 0, -inputDirection.z  / 2);
 
-        Debug.Log("x: " + inputDirection.x);
-        Debug.Log("y: " + inputDirection.z);
-
         if(Input.GetButton("Button3"))
         {
             transform.Rotate(new Vector3(0, -1, 0));
