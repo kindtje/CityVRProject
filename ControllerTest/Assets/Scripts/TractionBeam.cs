@@ -18,9 +18,7 @@ public class TractionBeam : MonoBehaviour {
 	void Update () {
 	
         if(Input.GetButton("Trigger") || Input.GetMouseButton(0))
-        {
-            Debug.Log("shot");
-           
+        {          
 
             RaycastHit hit;
             Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
@@ -29,7 +27,6 @@ public class TractionBeam : MonoBehaviour {
             if (Physics.Raycast(ray, out hit, 20) && !gotObject)
             {
                 if(hit.transform.tag == "MovableObject")
-                Debug.DrawRay(ray.origin, ray.direction, Color.red);
                 grabbedObject = hit.transform.gameObject;
                 hit.rigidbody.useGravity = false;
                 hit.transform.position = new Vector3(hit.transform.position.x, hit.transform.position.y + 1.5f, hit.transform.position.z);
@@ -37,10 +34,12 @@ public class TractionBeam : MonoBehaviour {
                 depth = hit.distance;
             }
 
+            grabbedObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+            grabbedObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
             Vector3 lookPos = cameraVector.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, depth));
             grabbedObject.transform.position = new Vector3(lookPos.x, grabbedObject.transform.position.y, lookPos.z);
 
-            if ((Input.GetButton("Button2") || Input.GetMouseButton(1)) && hit.distance > 2)
+            if ((Input.GetButton("Button2") || Input.GetMouseButton(1)) && hit.distance >= 2)
             {
                 depth -= 0.5f;
             }
@@ -49,8 +48,13 @@ public class TractionBeam : MonoBehaviour {
         if(Input.GetButtonUp("Trigger") || Input.GetMouseButtonUp(0))
         {
             grabbedObject.GetComponent<Rigidbody>().useGravity = true;
-            grabbedObject = null;
-            gotObject = false;
+            grabbedObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+
+            if (Input.GetButton("Button2"))
+                grabbedObject.GetComponent<Rigidbody>().AddForce(Camera.main.transform.forward * 4000);
+            
+                grabbedObject = null;
+                gotObject = false;
         }
 	}
 }
