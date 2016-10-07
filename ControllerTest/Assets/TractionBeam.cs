@@ -17,7 +17,7 @@ public class TractionBeam : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
-        if(Input.GetButton("Trigger"))
+        if(Input.GetButton("Trigger") || Input.GetMouseButton(0))
         {
             Debug.Log("shot");
            
@@ -32,21 +32,21 @@ public class TractionBeam : MonoBehaviour {
                 Debug.DrawRay(ray.origin, ray.direction, Color.red);
                 grabbedObject = hit.transform.gameObject;
                 hit.rigidbody.useGravity = false;
-                hit.transform.position = new Vector3(hit.transform.position.x, hit.transform.position.y + 5, hit.transform.position.z);
+                hit.transform.position = new Vector3(hit.transform.position.x, hit.transform.position.y + 1.5f, hit.transform.position.z);
                 gotObject = true;
-                depth = 10;
+                depth = hit.distance;
             }
 
             Vector3 lookPos = cameraVector.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, depth));
             grabbedObject.transform.position = new Vector3(lookPos.x, grabbedObject.transform.position.y, lookPos.z);
 
-            if (Input.GetButton("Button2"))
+            if ((Input.GetButton("Button2") || Input.GetMouseButton(1)) && hit.distance > 2)
             {
-                depth -= 0.001f;
+                depth -= 0.5f;
             }
 
         }
-        if(Input.GetButtonUp("Trigger"))
+        if(Input.GetButtonUp("Trigger") || Input.GetMouseButtonUp(0))
         {
             grabbedObject.GetComponent<Rigidbody>().useGravity = true;
             grabbedObject = null;

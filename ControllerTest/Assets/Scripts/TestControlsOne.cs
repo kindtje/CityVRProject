@@ -18,11 +18,19 @@ public class TestControlsOne : MonoBehaviour {
         if ((inputDirection.x >= 0.1 || inputDirection.x <= -0.1) || (inputDirection.z >= 0.1 || inputDirection.z <= -0.1))
             transform.Translate(inputDirection.x / 2, 0, -inputDirection.z  / 2);
 
-        if(Input.GetButton("Button3"))
+        if(Input.GetKey(KeyCode.A))
+        {
+            transform.Translate(-1, 0, 0);
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            transform.Translate(1, 0, 0);
+        }
+        if (Input.GetButton("Button3") || Input.GetKey(KeyCode.Q))
         {
             transform.Rotate(new Vector3(0, -1, 0));
         }
-        if (Input.GetButton("Button4"))
+        if (Input.GetButton("Button4") || Input.GetKey(KeyCode.E))
         {
             transform.Rotate(new Vector3(0, 1, 0));
         }
