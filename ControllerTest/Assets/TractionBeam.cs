@@ -26,7 +26,7 @@ public class TractionBeam : MonoBehaviour {
             Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
 
          
-            if (Physics.Raycast(ray, out hit, 100.0f) && !gotObject)
+            if (Physics.Raycast(ray, out hit, 20) && !gotObject)
             {
                 if(hit.transform.tag == "MovableObject")
                 Debug.DrawRay(ray.origin, ray.direction, Color.red);
