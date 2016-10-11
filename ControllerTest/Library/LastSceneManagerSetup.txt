@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Florian's Scene.unity
+- path: Assets/Scenes/demoScene.unity
   isLoaded: 1
   isActive: 1

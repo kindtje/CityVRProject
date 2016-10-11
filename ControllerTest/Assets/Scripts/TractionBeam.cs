@@ -34,7 +34,7 @@ public class TractionBeam : MonoBehaviour {
                 depth = hit.distance;
             }
 
-            grabbedObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+            //grabbedObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
             grabbedObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
             Vector3 lookPos = cameraVector.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, depth));
             grabbedObject.transform.position = new Vector3(lookPos.x, grabbedObject.transform.position.y, lookPos.z);
@@ -50,7 +50,7 @@ public class TractionBeam : MonoBehaviour {
             grabbedObject.GetComponent<Rigidbody>().useGravity = true;
             grabbedObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
 
-            if (Input.GetButton("Button2"))
+            if (Input.GetButton("Button2") || Input.GetMouseButton(1))
                 grabbedObject.GetComponent<Rigidbody>().AddForce(Camera.main.transform.forward * 4000);
             
                 grabbedObject = null;
