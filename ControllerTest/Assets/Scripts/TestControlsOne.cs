@@ -1,11 +1,14 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class TestControlsOne : MonoBehaviour {
 
-	// Use this for initialization
+
+    public Camera cam;
+    // Use this for initialization
 	void Start () {
-	
+	    
+       
 	}
 	
 	// Update is called once per frame
@@ -18,14 +21,22 @@ public class TestControlsOne : MonoBehaviour {
         if ((inputDirection.x >= 0.1 || inputDirection.x <= -0.1) || (inputDirection.z >= 0.1 || inputDirection.z <= -0.1))
             transform.Translate(inputDirection.x / 2, 0, -inputDirection.z  / 2);
 
-        Debug.Log("x: " + inputDirection.x);
-        Debug.Log("y: " + inputDirection.z);
-
-        if(Input.GetButton("Button3"))
+        //this is for testing without right controller
+        if (Input.GetKey(KeyCode.A))
+        {
+            transform.Translate(new Vector3());
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            transform.Translate(cam.transform.right * 1);
+        }
+        //till here
+        
+        if (Input.GetButton("Button3") || Input.GetKey(KeyCode.Q))
         {
             transform.Rotate(new Vector3(0, -1, 0));
         }
-        if (Input.GetButton("Button4"))
+        if (Input.GetButton("Button4") || Input.GetKey(KeyCode.E))
         {
             transform.Rotate(new Vector3(0, 1, 0));
         }
