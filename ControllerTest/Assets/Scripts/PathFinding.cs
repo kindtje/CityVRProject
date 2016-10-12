@@ -15,7 +15,7 @@ public class PathFinding : MonoBehaviour {
 
     string trackInUse;
 
-    bool entering = true;
+    public bool entering = true;
 
 
 	// Use this for initialization
@@ -25,7 +25,7 @@ public class PathFinding : MonoBehaviour {
             path = GameObject.Find("PathCar");
         }
         else
-    {
+        {
             switch (track)
             {
                 case 0:
@@ -79,7 +79,7 @@ public class PathFinding : MonoBehaviour {
             GetNextPathnode(entering);
             Debug.Log(pathNodeIndex);
 
-            if (targetNode == null && !entering)
+            if (targetNode == null && (!entering || type == 0))
             {
                 ReachedGoal();
             }
@@ -103,10 +103,18 @@ public class PathFinding : MonoBehaviour {
         {
             //move to the node
             transform.Translate( dir.normalized * distThisFrame, Space.World );
-            if(entering)
-                speed -= slowDown;
+            if (type == 1)
+            {
+                if (entering)
+                    speed -= slowDown;
+                else
+                    speed += slowDown;
+            }
             else
-                speed += slowDown;
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(dir);
+                this.transform.rotation = Quaternion.Lerp(this.transform.rotation, targetRotation, Time.deltaTime * 3);
+            }
         }
 	}
 
@@ -120,7 +128,10 @@ public class PathFinding : MonoBehaviour {
 
     void ReachedGoal()
     {
-        path.tag = trackInUse;
+        if (type == 1)
+        {
+            path.tag = trackInUse;
+        }
         Destroy(this.gameObject);
     }
 }
