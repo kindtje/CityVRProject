@@ -26,12 +26,20 @@ public class TractionBeam : MonoBehaviour {
          
             if (Physics.Raycast(ray, out hit, 20) && !gotObject)
             {
-                if(hit.transform.tag == "MovableObject")
-                grabbedObject = hit.transform.gameObject;
-                hit.rigidbody.useGravity = false;
-                hit.transform.position = new Vector3(hit.transform.position.x, hit.transform.position.y + 1.5f, hit.transform.position.z);
-                gotObject = true;
-                depth = hit.distance;
+                if (hit.transform.tag == "MovableObject" || hit.transform.tag == "Collectible")
+                {
+                    if (hit.transform.tag == "Collectible")
+                    {
+                        Debug.Log("detected");
+                        GetComponentInChildren<BoxCollider>().isTrigger = true;
+                    }
+                    
+                    grabbedObject = hit.transform.gameObject;
+                    hit.rigidbody.useGravity = false;
+                    hit.transform.position = new Vector3(hit.transform.position.x, hit.transform.position.y + 1.5f, hit.transform.position.z);
+                    gotObject = true;
+                    depth = hit.distance;
+                }
             }
 
             //grabbedObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
