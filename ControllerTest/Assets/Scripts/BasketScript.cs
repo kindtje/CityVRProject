@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BasketScript : MonoBehaviour {
+public class BasketScript : MonoBehaviour 
+{
 
     public AudioSource playAudio;
     public AudioClip theClip;
