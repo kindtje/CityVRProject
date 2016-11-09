@@ -7,6 +7,7 @@ public class TractionBeam : MonoBehaviour {
     public Camera cameraVector;
     public float retractSpeed = 0.3f;
     public float objectMaxDis = 40;
+    public bool inMenu = false;
 
     Transform cam = Camera.main.transform;
     RaycastHit hit;
@@ -63,7 +64,8 @@ public class TractionBeam : MonoBehaviour {
 
             if (Input.GetButton("Button2") && hit.distance >= 2 && depth < objectMaxDis)
             {
-                GetComponent<TestControllerThree>().enabled = false;
+                if(!inMenu)
+                    GetComponent<TestControllerThree>().enabled = false;
                 
                 if (Input.GetAxis("JoystickHorizontal") >= 0.1)
                 {
@@ -76,13 +78,16 @@ public class TractionBeam : MonoBehaviour {
             }
             else if (Input.GetButtonUp("Button2") || depth > objectMaxDis)
             {
-                GetComponent<TestControllerThree>().enabled = true;
+                if (!inMenu)
+                    GetComponent<TestControllerThree>().enabled = true;
             }
 
             //for dropping object
             if(Input.GetButton("Button2") && Input.GetButton("Trigger"))
             {
-                GetComponent<TestControllerThree>().enabled = true;
+                if (!inMenu)
+                    GetComponent<TestControllerThree>().enabled = true;
+
                 grabbedObject.GetComponent<Rigidbody>().useGravity = true;
                 grabbedObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
                 grabbedObject = null;
@@ -92,7 +97,9 @@ public class TractionBeam : MonoBehaviour {
             //when the object is further than it should be it drops
             if (depth > objectMaxDis)
             {
-                GetComponent<TestControllerThree>().enabled = true;
+                if (!inMenu)
+                    GetComponent<TestControllerThree>().enabled = true;
+
                 grabbedObject.GetComponent<Rigidbody>().useGravity = true;
                 grabbedObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
                 grabbedObject = null;

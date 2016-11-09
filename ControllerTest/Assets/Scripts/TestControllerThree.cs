@@ -5,6 +5,7 @@ public class TestControllerThree : MonoBehaviour {
 
     public float speed = 0.5f;
     public float rotSpeed = 0.5f;
+    public float sideWaysSpeed = 0.38f;
     public Camera cam;
 
     // Use this for initialization
@@ -38,11 +39,11 @@ public class TestControllerThree : MonoBehaviour {
 
         if (Input.GetButton("Button3") || Input.GetKey(KeyCode.Q))
         {
-            transform.Translate(Vector3.right * -speed);
+            transform.Translate(Vector3.right * -sideWaysSpeed);
         }
         if (Input.GetButton("Button4") || Input.GetKey(KeyCode.E))
         {
-            transform.Translate(Vector3.right * speed);
+            transform.Translate(Vector3.right * sideWaysSpeed);
         }
     }
 }
