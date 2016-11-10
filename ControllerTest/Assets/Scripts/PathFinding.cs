@@ -30,26 +30,52 @@ public class PathFinding : MonoBehaviour {
             {
                 case 0:
                     path = GameObject.FindGameObjectWithTag("TrackOne");
-                    this.transform.position = new Vector3(15.8f, -3.3f, 447.4f);
-                    slowDown = 0.0505f;
+                    this.transform.position = new Vector3(166.4f, 0f, 400.2f);
+                    //slowDown = 0.0505f;
                     break;
 
                 case 1:
                     path = GameObject.FindGameObjectWithTag("TrackTwo");
-                    this.transform.position = new Vector3(16.7f, -3.3f, -275f);
-                    slowDown = 0.0595f;
+                    this.transform.position = new Vector3(159.7f, 0f, 400.2f);
+                    //slowDown = 0.0595f;
+                    break;
+
+                case 2:
+                    path = GameObject.FindGameObjectWithTag("TrackThree");
+                    this.transform.position = new Vector3(157.03f, 0f, 400.2f);
+                    //slowDown = 0.0505f;
+                    break;
+
+                case 3:
+                    path = GameObject.FindGameObjectWithTag("TrackFour");
+                    this.transform.position = new Vector3(165.3f, 0.462f, -87.5f);
+                    //slowDown = 0.0595f;
+                    break;
+
+                case 4:
+                    path = GameObject.FindGameObjectWithTag("TrackFive");
+                    this.transform.position = new Vector3(162.49f, 0.462f, -87.5f);
+                    //slowDown = 0.0505f;
+                    break;
+
+                case 5:
+                    path = GameObject.FindGameObjectWithTag("TrackSix");
+                    this.transform.position = new Vector3(157.87f, 0.462f, -87.5f);
+                    //slowDown = 0.0595f;
                     break;
             }
-            if(path == null)
+
+            if (path == null)
             {
                 Destroy(this.gameObject);
             }
 
             trackInUse = path.tag;
             path.tag = "Untagged";
+
         }
-        
-	}
+
+    }
 
     void GetNextPathnode(bool entering)
     {

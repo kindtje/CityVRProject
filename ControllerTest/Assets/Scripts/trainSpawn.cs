@@ -22,7 +22,7 @@ public class trainSpawn : MonoBehaviour {
     {
         int wait = Random.Range(minSpawnTime, maxSpawnTime);
         yield return new WaitForSeconds((float)wait);
-        GameObject trainType = Instantiate(train, new Vector3(0, 6.5f, 0), Quaternion.identity) as GameObject;
+        GameObject trainType = Instantiate(train, new Vector3(0, 6.5f, 0), Quaternion.Euler(-90, 0, 0)) as GameObject;
         trainType.GetComponent<PathFinding>().track = Random.Range(0, amountOfTracks);
 
         StartCoroutine(SpawnTrain());
